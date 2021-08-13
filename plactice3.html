@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>plactice3</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<style>
+p {
+  font-weight: 600;
+  font-size: 40px;
+}
+input {
+  width: 20%;
+  font-size: 40px;
+  border: 5px solid rgb(87, 173, 92);
+  border-radius: 8px;
+}
+
+td {
+  font-size: 40px;
+  font-weight: 300;
+}
+
+</style>
+<body>
+  <div id="app">
+    <p>リアルタイム検索</p>
+    <div class="content">
+      <input type="text" v-model="keyword">
+      <table>
+        <tr v-for="person in filteredPersons" :key="person.name">
+          <td>{{person.name}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <script>
+  new Vue({
+      el: '#app',
+      data: {
+        keyword: '',
+        persons: [
+          {
+            name: '佐藤',
+          },
+          {
+            name: '山田',
+          },
+          {
+            name: '鈴木',
+          },
+          {
+            name: '田中',
+          },
+        ]
+      },
+      computed: {
+        filteredPersons: function () {
+          var persons = [];
+          for (var vm in this.persons) {
+            var person = this.persons[vm];
+            if (
+              person.name.indexOf(this.keyword) !== -1 ) {
+              persons.push(person);
+            }
+          }
+          return persons;
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
